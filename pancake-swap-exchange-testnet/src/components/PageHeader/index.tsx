@@ -1,29 +1,29 @@
-import React, { ReactNode } from 'react'
-import styled from 'styled-components'
-import { Heading, IconButton, Text, Flex, useModal, TuneIcon, HistoryIcon } from '@nguyenphu27/uikit'
-import useI18n from 'hooks/useI18n'
-import SettingsModal from './SettingsModal'
-import RecentTransactionsModal from './RecentTransactionsModal'
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+import { Heading, IconButton, Text, Flex, useModal, TuneIcon, HistoryIcon } from '@nguyenphu27/uikit';
+import useI18n from 'hooks/useI18n';
+import SettingsModal from './SettingsModal';
+import RecentTransactionsModal from './RecentTransactionsModal';
 
 interface PageHeaderProps {
-  title: ReactNode
-  description?: ReactNode
-  children?: ReactNode
+  title: ReactNode;
+  description?: ReactNode;
+  children?: ReactNode;
 }
 
 const StyledPageHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
   padding: 24px;
-`
+`;
 
 const Details = styled.div`
   flex: 1;
-`
+`;
 
 const PageHeader = ({ title, description, children }: PageHeaderProps) => {
-  const TranslateString = useI18n()
-  const [onPresentSettings] = useModal(<SettingsModal translateString={TranslateString} />)
-  const [onPresentRecentTransactions] = useModal(<RecentTransactionsModal translateString={TranslateString} />)
+  const TranslateString = useI18n();
+  const [onPresentSettings] = useModal(<SettingsModal translateString={TranslateString} />);
+  const [onPresentRecentTransactions] = useModal(<RecentTransactionsModal translateString={TranslateString} />);
 
   return (
     <StyledPageHeader>
@@ -49,7 +49,7 @@ const PageHeader = ({ title, description, children }: PageHeaderProps) => {
       </Flex>
       {children && <Text mt="16px">{children}</Text>}
     </StyledPageHeader>
-  )
-}
+  );
+};
 
-export default PageHeader
+export default PageHeader;

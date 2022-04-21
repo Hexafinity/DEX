@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { Input, Text, Flex, Box } from '@nguyenphu27/uikit'
-import { useUserDeadline } from 'state/user/hooks'
-import QuestionHelper from '../QuestionHelper'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Input, Text, Flex, Box } from '@nguyenphu27/uikit';
+import { useUserDeadline } from 'state/user/hooks';
+import QuestionHelper from '../QuestionHelper';
 
 const Field = styled.div`
   align-items: center;
@@ -11,36 +11,36 @@ const Field = styled.div`
   & > ${Input} {
     max-width: 100px;
   }
-`
+`;
 
 type TransactionDeadlineSettingModalProps = {
-  translateString: (translationId: number, fallback: string) => string
-}
+  translateString: (translationId: number, fallback: string) => string;
+};
 
 const TransactionDeadlineSetting = ({ translateString }: TransactionDeadlineSettingModalProps) => {
-  const [deadline, setDeadline] = useUserDeadline()
-  const [value, setValue] = useState(deadline / 60) // deadline in minutes
-  const [error, setError] = useState<string | null>(null)
+  const [deadline, setDeadline] = useUserDeadline();
+  const [value, setValue] = useState(deadline / 60); // deadline in minutes
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const { value: inputValue } = evt.target
-    setValue(parseInt(inputValue, 10))
-  }
+    const { value: inputValue } = evt.target;
+    setValue(parseInt(inputValue, 10));
+  };
 
   // Updates local storage if value is valid
   useEffect(() => {
     try {
-      const rawValue = value * 60
+      const rawValue = value * 60;
       if (!Number.isNaN(rawValue) && rawValue > 0) {
-        setDeadline(rawValue)
-        setError(null)
+        setDeadline(rawValue);
+        setError(null);
       } else {
-        setError(translateString(1150, 'Enter a valid deadline'))
+        setError(translateString(1150, 'Enter a valid deadline'));
       }
     } catch {
-      setError(translateString(1150, 'Enter a valid deadline'))
+      setError(translateString(1150, 'Enter a valid deadline'));
     }
-  }, [value, setError, setDeadline, translateString])
+  }, [value, setError, setDeadline, translateString]);
 
   return (
     <Box mb="16px">
@@ -62,7 +62,7 @@ const TransactionDeadlineSetting = ({ translateString }: TransactionDeadlineSett
         </Text>
       )}
     </Box>
-  )
-}
+  );
+};
 
-export default TransactionDeadlineSetting
+export default TransactionDeadlineSetting;

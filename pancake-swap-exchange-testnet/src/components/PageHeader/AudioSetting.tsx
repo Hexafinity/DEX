@@ -1,14 +1,14 @@
-import React from 'react'
-import { Box, Flex, Text, PancakeToggle, useMatchBreakpoints } from '@nguyenphu27/uikit'
-import { useAudioModeManager } from 'state/user/hooks'
+import React from 'react';
+import { Box, Flex, Text, PancakeToggle, useMatchBreakpoints } from '@nguyenphu27/uikit';
+import { useAudioModeManager } from 'state/user/hooks';
 
 type AudioSettingModalProps = {
-  translateString: (translationId: number, fallback: string) => string
-}
+  translateString: (translationId: number, fallback: string) => string;
+};
 
 const AudioSetting = ({ translateString }: AudioSettingModalProps) => {
-  const { isSm, isXs } = useMatchBreakpoints()
-  const [audioPlay, toggleSetAudioMode] = useAudioModeManager()
+  const { isSm, isXs } = useMatchBreakpoints();
+  const [audioPlay, toggleSetAudioMode] = useAudioModeManager();
 
   return (
     <Box mb="16px">
@@ -19,7 +19,7 @@ const AudioSetting = ({ translateString }: AudioSettingModalProps) => {
         <PancakeToggle scale={isSm || isXs ? 'sm' : 'md'} checked={audioPlay} onChange={toggleSetAudioMode} />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default AudioSetting
+export default AudioSetting;

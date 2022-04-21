@@ -1,4 +1,4 @@
-import { MenuEntry } from '@nguyenphu27/uikit'
+import { MenuEntry } from '@nguyenphu27/uikit';
 
 const config: MenuEntry[] = [
   {
@@ -138,6 +138,6 @@ const config: MenuEntry[] = [
       },
     ],
   },
-]
+];
 
-export default config
+export default config;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -27,6 +27,6 @@ const Container = styled.div`
     background-size: contain, 266px, 266px;
     min-height: 90vh;
   }
-`
+`;
 
-export default Container
+export default Container;

@@ -1,16 +1,16 @@
-import React from 'react'
-import Modal from '../Modal'
-import { useActiveWeb3React } from '../../hooks'
-import ConfirmationPendingContent from './ConfirmationPendingContent'
-import TransactionSubmittedContent from './TransactionSubmittedContent'
+import React from 'react';
+import Modal from '../Modal';
+import { useActiveWeb3React } from '../../hooks';
+import ConfirmationPendingContent from './ConfirmationPendingContent';
+import TransactionSubmittedContent from './TransactionSubmittedContent';
 
 interface ConfirmationModalProps {
-  isOpen: boolean
-  onDismiss: () => void
-  hash: string | undefined
-  content: () => React.ReactNode
-  attemptingTxn: boolean
-  pendingText: string
+  isOpen: boolean;
+  onDismiss: () => void;
+  hash: string | undefined;
+  content: () => React.ReactNode;
+  attemptingTxn: boolean;
+  pendingText: string;
 }
 
 const TransactionConfirmationModal = ({
@@ -19,11 +19,11 @@ const TransactionConfirmationModal = ({
   attemptingTxn,
   hash,
   pendingText,
-  content
+  content,
 }: ConfirmationModalProps) => {
-  const { chainId } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React();
 
-  if (!chainId) return null
+  if (!chainId) return null;
 
   // confirmation screen
   return (
@@ -36,7 +36,7 @@ const TransactionConfirmationModal = ({
         content()
       )}
     </Modal>
-  )
-}
+  );
+};
 
-export default TransactionConfirmationModal
+export default TransactionConfirmationModal;

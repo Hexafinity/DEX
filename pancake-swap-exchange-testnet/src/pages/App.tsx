@@ -1,31 +1,31 @@
-import React, { Suspense, useEffect, useState } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
-import styled from 'styled-components'
-import { Language } from '@nguyenphu27/uikit'
-import VersionBar from 'components/VersionBar'
-import Popups from '../components/Popups'
-import Web3ReactManager from '../components/Web3ReactManager'
-import { RedirectDuplicateTokenIds, RedirectOldAddLiquidityPathStructure } from './AddLiquidity/redirects'
-import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
-import AddLiquidity from './AddLiquidity'
-import Pool from './Pool'
-import PoolFinder from './PoolFinder'
-import RemoveLiquidity from './RemoveLiquidity'
-import Swap from './Swap'
-import Migration from './Migration'
-import { RedirectPathToSwapOnly } from './Swap/redirects'
-import { EN, allLanguages } from '../constants/localisation/languageCodes'
-import { LanguageContext } from '../hooks/LanguageContext'
-import { TranslationsContext } from '../hooks/TranslationsContext'
+import React, { Suspense, useEffect, useState } from 'react';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+import { Language } from '@nguyenphu27/uikit';
+import VersionBar from 'components/VersionBar';
+import Popups from '../components/Popups';
+import Web3ReactManager from '../components/Web3ReactManager';
+import { RedirectDuplicateTokenIds, RedirectOldAddLiquidityPathStructure } from './AddLiquidity/redirects';
+import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects';
+import AddLiquidity from './AddLiquidity';
+import Pool from './Pool';
+import PoolFinder from './PoolFinder';
+import RemoveLiquidity from './RemoveLiquidity';
+import Swap from './Swap';
+import Migration from './Migration';
+import { RedirectPathToSwapOnly } from './Swap/redirects';
+import { EN, allLanguages } from '../constants/localisation/languageCodes';
+import { LanguageContext } from '../hooks/LanguageContext';
+import { TranslationsContext } from '../hooks/TranslationsContext';
 
-import Menu from '../components/Menu'
+import Menu from '../components/Menu';
 
 const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;
   align-items: flex-start;
   overflow-x: hidden;
-`
+`;
 
 const BodyWrapper = styled.div`
   overflow-y: auto;
@@ -35,35 +35,35 @@ const BodyWrapper = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     margin-bottom: 0;
   }
-`
+`;
 
-const CACHE_KEY = 'pancakeSwapLanguage'
+const CACHE_KEY = 'pancakeSwapLanguage';
 
 export default function App() {
-  const [selectedLanguage, setSelectedLanguage] = useState<any>(undefined)
-  const [translatedLanguage, setTranslatedLanguage] = useState<any>(undefined)
-  const [translations, setTranslations] = useState<Array<any>>([])
+  const [selectedLanguage, setSelectedLanguage] = useState<any>(undefined);
+  const [translatedLanguage, setTranslatedLanguage] = useState<any>(undefined);
+  const [translations, setTranslations] = useState<Array<any>>([]);
 
   const getStoredLang = (storedLangCode: string) => {
     return allLanguages.filter((language) => {
-      return language.code === storedLangCode
-    })[0]
-  }
+      return language.code === storedLangCode;
+    })[0];
+  };
 
   useEffect(() => {
-    const storedLangCode = localStorage.getItem(CACHE_KEY)
+    const storedLangCode = localStorage.getItem(CACHE_KEY);
     if (storedLangCode) {
-      const storedLang = getStoredLang(storedLangCode)
-      setSelectedLanguage(storedLang)
+      const storedLang = getStoredLang(storedLangCode);
+      setSelectedLanguage(storedLang);
     } else {
-      setSelectedLanguage(EN)
+      setSelectedLanguage(EN);
     }
-  }, [])
+  }, []);
 
   const handleLanguageSelect = (langObject: Language) => {
-    setSelectedLanguage(langObject)
-    localStorage.setItem(CACHE_KEY, langObject.code)
-  }
+    setSelectedLanguage(langObject);
+    localStorage.setItem(CACHE_KEY, langObject.code);
+  };
 
   return (
     <Suspense fallback={null}>
@@ -106,5 +106,5 @@ export default function App() {
         </AppWrapper>
       </HashRouter>
     </Suspense>
-  )
+  );
 }

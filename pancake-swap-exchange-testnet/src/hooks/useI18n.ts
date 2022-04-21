@@ -1,9 +1,9 @@
-import { useCallback, useContext } from 'react'
-import { TranslationsContext } from 'hooks/TranslationsContext'
-import { getTranslation } from 'utils/translateTextHelpers'
+import { useCallback, useContext } from 'react';
+import { TranslationsContext } from 'hooks/TranslationsContext';
+import { getTranslation } from 'utils/translateTextHelpers';
 
 const useI18n = () => {
-  const { translations } = useContext(TranslationsContext)
+  const { translations } = useContext(TranslationsContext);
 
   /**
    * As a temporary fix memoize the translation function so it can be used in an effect.
@@ -13,15 +13,15 @@ const useI18n = () => {
   return useCallback(
     (translationId: number, fallback: string) => {
       if (translations[0] === 'error') {
-        return fallback
+        return fallback;
       }
       if (translations.length > 0) {
-        return getTranslation(translations, translationId, fallback)
+        return getTranslation(translations, translationId, fallback);
       }
-      return fallback
+      return fallback;
     },
     [translations]
-  )
-}
+  );
+};
 
-export default useI18n
+export default useI18n;

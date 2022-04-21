@@ -1,34 +1,34 @@
-import React, { useState } from 'react'
-import { ThemeProvider as SCThemeProvider } from 'styled-components'
-import { light, dark } from '@nguyenphu27/uikit'
+import React, { useState } from 'react';
+import { ThemeProvider as SCThemeProvider } from 'styled-components';
+import { light, dark } from '@nguyenphu27/uikit';
 
-const CACHE_KEY = 'IS_DARK'
+const CACHE_KEY = 'IS_DARK';
 
 export interface ThemeContextType {
   isDark: boolean;
   toggleTheme: () => void;
 }
 
-const ThemeContext = React.createContext<ThemeContextType>({ isDark: false, toggleTheme: () => null })
+const ThemeContext = React.createContext<ThemeContextType>({ isDark: false, toggleTheme: () => null });
 
 const ThemeContextProvider = (props) => {
   const [isDark, setIsDark] = useState(() => {
-    const isDarkUserSetting = localStorage.getItem(CACHE_KEY)
-    return isDarkUserSetting ? JSON.parse(isDarkUserSetting) : false
-  })
+    const isDarkUserSetting = localStorage.getItem(CACHE_KEY);
+    return isDarkUserSetting ? JSON.parse(isDarkUserSetting) : false;
+  });
 
   const toggleTheme = () => {
     setIsDark((prevState: any) => {
-      localStorage.setItem(CACHE_KEY, JSON.stringify(!prevState))
-      return !prevState
-    })
-  }
+      localStorage.setItem(CACHE_KEY, JSON.stringify(!prevState));
+      return !prevState;
+    });
+  };
 
   return (
     <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      <SCThemeProvider theme={isDark ? dark : light} {...props}/>
+      <SCThemeProvider theme={isDark ? dark : light} {...props} />
     </ThemeContext.Provider>
-  )
-}
+  );
+};
 
-export { ThemeContext, ThemeContextProvider }
+export { ThemeContext, ThemeContextProvider };

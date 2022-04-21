@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import {
   Card,
   CardHeader,
@@ -12,7 +12,7 @@ import {
   ArrowDownIcon,
   ErrorIcon,
   OpenNewIcon,
-} from '@nguyenphu27/uikit'
+} from '@nguyenphu27/uikit';
 
 const otherProjects = [
   {
@@ -59,14 +59,14 @@ const otherProjects = [
     label: 'ValueDeFi',
     href: 'https://bsc.valuedefi.io/#/',
   },
-]
+];
 
 const FoldableContent = styled(CardBody)<{ isVisible: boolean }>`
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
-`
+`;
 
 const FirstCard = () => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <Card>
@@ -136,7 +136,7 @@ const FirstCard = () => {
         </Card>
       </CardBody>
     </Card>
-  )
-}
+  );
+};
 
-export default FirstCard
+export default FirstCard;

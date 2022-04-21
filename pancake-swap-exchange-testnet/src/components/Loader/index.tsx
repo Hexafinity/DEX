@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components';
 
 const rotate = keyframes`
   from {
@@ -9,7 +9,7 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
-`
+`;
 
 const StyledSVG = styled.svg<{ size: string; stroke?: string }>`
   animation: 2s ${rotate} linear infinite;
@@ -18,7 +18,7 @@ const StyledSVG = styled.svg<{ size: string; stroke?: string }>`
   path {
     stroke: ${({ stroke, theme }) => stroke ?? theme.colors.primary};
   }
-`
+`;
 
 /**
  * Takes in custom size and stroke for circle color, default to primary color as fill,
@@ -34,5 +34,5 @@ export default function Loader({ size = '16px', stroke, ...rest }: { size?: stri
         strokeLinejoin="round"
       />
     </StyledSVG>
-  )
+  );
 }

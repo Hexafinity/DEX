@@ -1,10 +1,10 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '@nguyenphu27/sdk'
-import React from 'react'
-import { Button, Text } from '@nguyenphu27/uikit'
-import { TranslateString } from 'utils/translateTextHelpers'
-import { RowBetween, RowFixed } from '../../components/Row'
-import CurrencyLogo from '../../components/CurrencyLogo'
-import { Field } from '../../state/mint/actions'
+import { Currency, CurrencyAmount, Fraction, Percent } from '@nguyenphu27/sdk';
+import React from 'react';
+import { Button, Text } from '@nguyenphu27/uikit';
+import { TranslateString } from 'utils/translateTextHelpers';
+import { RowBetween, RowFixed } from '../../components/Row';
+import CurrencyLogo from '../../components/CurrencyLogo';
+import { Field } from '../../state/mint/actions';
 
 export function ConfirmAddModalBottom({
   noLiquidity,
@@ -14,12 +14,12 @@ export function ConfirmAddModalBottom({
   poolTokenPercentage,
   onAdd,
 }: {
-  noLiquidity?: boolean
-  price?: Fraction
-  currencies: { [field in Field]?: Currency }
-  parsedAmounts: { [field in Field]?: CurrencyAmount }
-  poolTokenPercentage?: Percent
-  onAdd: () => void
+  noLiquidity?: boolean;
+  price?: Fraction;
+  currencies: { [field in Field]?: Currency };
+  parsedAmounts: { [field in Field]?: CurrencyAmount };
+  poolTokenPercentage?: Percent;
+  onAdd: () => void;
 }) {
   return (
     <>
@@ -60,7 +60,7 @@ export function ConfirmAddModalBottom({
         {noLiquidity ? 'Create Pool & Supply' : 'Confirm Supply'}
       </Button>
     </>
-  )
+  );
 }
 
-export default ConfirmAddModalBottom
+export default ConfirmAddModalBottom;

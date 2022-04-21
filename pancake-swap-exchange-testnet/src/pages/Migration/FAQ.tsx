@@ -1,17 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Heading, Text, Card, CardHeader, CardBody, Image } from '@nguyenphu27/uikit'
-import FoldableText from 'components/FoldableText'
-import Container from 'components/Container'
-import useI18n from 'hooks/useI18n'
-import config from './config'
+import React from 'react';
+import styled from 'styled-components';
+import { Heading, Text, Card, CardHeader, CardBody, Image } from '@nguyenphu27/uikit';
+import FoldableText from 'components/FoldableText';
+import Container from 'components/Container';
+import useI18n from 'hooks/useI18n';
+import config from './config';
 
 const Wrapper = styled(Container)`
   background: ${({ theme }) => theme.colors.gradients.violetAlt};
-`
+`;
 
 const FAQ = () => {
-  const TranslateString = useI18n()
+  const TranslateString = useI18n();
 
   return (
     <Wrapper>
@@ -40,7 +40,7 @@ const FAQ = () => {
                   <Text key={fallback} color="textSubtle" as="p">
                     {TranslateString(id, fallback)}
                   </Text>
-                )
+                );
               })}
             </FoldableText>
           ))}
@@ -48,7 +48,7 @@ const FAQ = () => {
       </Card>
       <Image src="/images/migrate.svg" width={242} height={227} mt="16px" />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default FAQ
+export default FAQ;

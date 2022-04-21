@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
-import { ThemeContext } from 'styled-components'
-import { Button, Text } from '@nguyenphu27/uikit'
-import { AlertTriangle } from 'react-feather'
-import { AutoColumn } from '../Column'
-import { Wrapper, Section, BottomSection, ContentHeader } from './helpers'
+import React, { useContext } from 'react';
+import { ThemeContext } from 'styled-components';
+import { Button, Text } from '@nguyenphu27/uikit';
+import { AlertTriangle } from 'react-feather';
+import { AutoColumn } from '../Column';
+import { Wrapper, Section, BottomSection, ContentHeader } from './helpers';
 
-type TransactionErrorContentProps = { message: string; onDismiss: () => void }
+type TransactionErrorContentProps = { message: string; onDismiss: () => void };
 
 const TransactionErrorContent = ({ message, onDismiss }: TransactionErrorContentProps) => {
   // @ts-ignore
-  const theme = useContext(ThemeContext)
+  const theme = useContext(ThemeContext);
   return (
     <Wrapper>
       <Section>
@@ -25,7 +25,7 @@ const TransactionErrorContent = ({ message, onDismiss }: TransactionErrorContent
         <Button onClick={onDismiss}>Dismiss</Button>
       </BottomSection>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default TransactionErrorContent
+export default TransactionErrorContent;

@@ -1,10 +1,10 @@
-import React from 'react'
-import { Currency, Percent, Price } from '@nguyenphu27/sdk'
-import { Text } from '@nguyenphu27/uikit'
-import { AutoColumn } from '../../components/Column'
-import { AutoRow } from '../../components/Row'
-import { ONE_BIPS } from '../../constants'
-import { Field } from '../../state/mint/actions'
+import React from 'react';
+import { Currency, Percent, Price } from '@nguyenphu27/sdk';
+import { Text } from '@nguyenphu27/uikit';
+import { AutoColumn } from '../../components/Column';
+import { AutoRow } from '../../components/Row';
+import { ONE_BIPS } from '../../constants';
+import { Field } from '../../state/mint/actions';
 
 export function PoolPriceBar({
   currencies,
@@ -12,10 +12,10 @@ export function PoolPriceBar({
   poolTokenPercentage,
   price,
 }: {
-  currencies: { [field in Field]?: Currency }
-  noLiquidity?: boolean
-  poolTokenPercentage?: Percent
-  price?: Price
+  currencies: { [field in Field]?: Currency };
+  noLiquidity?: boolean;
+  poolTokenPercentage?: Percent;
+  price?: Price;
 }) {
   return (
     <AutoColumn gap="md">
@@ -45,7 +45,7 @@ export function PoolPriceBar({
         </AutoColumn>
       </AutoRow>
     </AutoColumn>
-  )
+  );
 }
 
-export default PoolPriceBar
+export default PoolPriceBar;

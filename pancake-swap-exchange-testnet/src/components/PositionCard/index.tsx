@@ -1,52 +1,52 @@
-import React, { useState } from 'react'
-import { JSBI, Pair, Percent } from '@nguyenphu27/sdk'
-import { Button, Card as UIKitCard, CardBody, Text } from '@nguyenphu27/uikit'
-import { darken } from 'polished'
-import { ChevronDown, ChevronUp } from 'react-feather'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { useTotalSupply } from '../../data/TotalSupply'
+import React, { useState } from 'react';
+import { JSBI, Pair, Percent } from '@nguyenphu27/sdk';
+import { Button, Card as UIKitCard, CardBody, Text } from '@nguyenphu27/uikit';
+import { darken } from 'polished';
+import { ChevronDown, ChevronUp } from 'react-feather';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { useTotalSupply } from '../../data/TotalSupply';
 
-import { useActiveWeb3React } from '../../hooks'
-import { useTokenBalance } from '../../state/wallet/hooks'
-import { currencyId } from '../../utils/currencyId'
-import { unwrappedToken } from '../../utils/wrappedCurrency'
-import Card from '../Card'
-import { AutoColumn } from '../Column'
-import CurrencyLogo from '../CurrencyLogo'
-import DoubleCurrencyLogo from '../DoubleLogo'
-import { RowBetween, RowFixed } from '../Row'
-import { Dots } from '../swap/styleds'
+import { useActiveWeb3React } from '../../hooks';
+import { useTokenBalance } from '../../state/wallet/hooks';
+import { currencyId } from '../../utils/currencyId';
+import { unwrappedToken } from '../../utils/wrappedCurrency';
+import Card from '../Card';
+import { AutoColumn } from '../Column';
+import CurrencyLogo from '../CurrencyLogo';
+import DoubleCurrencyLogo from '../DoubleLogo';
+import { RowBetween, RowFixed } from '../Row';
+import { Dots } from '../swap/styleds';
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
-`
+`;
 
 export const HoverCard = styled(Card)`
   border: 1px solid ${({ theme }) => theme.colors.invertedContrast};
   :hover {
     border: 1px solid ${({ theme }) => darken(0.06, theme.colors.invertedContrast)};
   }
-`
+`;
 
 interface PositionCardProps {
-  pair: Pair
+  pair: Pair;
   // eslint-disable-next-line react/no-unused-prop-types
-  showUnwrapped?: boolean
+  showUnwrapped?: boolean;
   // eslint-disable-next-line react/no-unused-prop-types
-  removeOnly?: boolean
+  removeOnly?: boolean;
 }
 
 export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCardProps) {
-  const { account } = useActiveWeb3React()
+  const { account } = useActiveWeb3React();
 
-  const currency0 = showUnwrapped ? pair.token0 : unwrappedToken(pair.token0)
-  const currency1 = showUnwrapped ? pair.token1 : unwrappedToken(pair.token1)
+  const currency0 = showUnwrapped ? pair.token0 : unwrappedToken(pair.token0);
+  const currency1 = showUnwrapped ? pair.token1 : unwrappedToken(pair.token1);
 
-  const [showMore, setShowMore] = useState(false)
+  const [showMore, setShowMore] = useState(false);
 
-  const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
-  const totalPoolTokens = useTotalSupply(pair.liquidityToken)
+  const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken);
+  const totalPoolTokens = useTotalSupply(pair.liquidityToken);
 
   const [token0Deposited, token1Deposited] =
     !!pair &&
@@ -58,7 +58,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCar
           pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
           pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false),
         ]
-      : [undefined, undefined]
+      : [undefined, undefined];
 
   return (
     <>
@@ -115,24 +115,24 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCar
         </UIKitCard>
       )}
     </>
-  )
+  );
 }
 
 export default function FullPositionCard({ pair, removeOnly }: PositionCardProps) {
-  const { account } = useActiveWeb3React()
+  const { account } = useActiveWeb3React();
 
-  const currency0 = unwrappedToken(pair.token0)
-  const currency1 = unwrappedToken(pair.token1)
+  const currency0 = unwrappedToken(pair.token0);
+  const currency1 = unwrappedToken(pair.token1);
 
-  const [showMore, setShowMore] = useState(false)
+  const [showMore, setShowMore] = useState(false);
 
-  const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
-  const totalPoolTokens = useTotalSupply(pair.liquidityToken)
+  const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken);
+  const totalPoolTokens = useTotalSupply(pair.liquidityToken);
 
   const poolTokenPercentage =
     !!userPoolBalance && !!totalPoolTokens && JSBI.greaterThanOrEqual(totalPoolTokens.raw, userPoolBalance.raw)
       ? new Percent(userPoolBalance.raw, totalPoolTokens.raw)
-      : undefined
+      : undefined;
 
   const [token0Deposited, token1Deposited] =
     !!pair &&
@@ -144,7 +144,7 @@ export default function FullPositionCard({ pair, removeOnly }: PositionCardProps
           pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
           pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false),
         ]
-      : [undefined, undefined]
+      : [undefined, undefined];
 
   return (
     <HoverCard>
@@ -222,5 +222,5 @@ export default function FullPositionCard({ pair, removeOnly }: PositionCardProps
         )}
       </AutoColumn>
     </HoverCard>
-  )
+  );
 }

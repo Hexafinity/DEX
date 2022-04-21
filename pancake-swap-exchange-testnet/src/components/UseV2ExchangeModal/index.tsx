@@ -1,56 +1,56 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
-import { Modal, Text, Link, Button, Flex, Checkbox, Box } from '@nguyenphu27/uikit'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Modal, Text, Link, Button, Flex, Checkbox, Box } from '@nguyenphu27/uikit';
 
-const defaultOnDismiss = () => null
+const defaultOnDismiss = () => null;
 
 const StyledLink = styled(Link)`
   width: 100%;
-`
+`;
 
 const Divider = styled.div`
   margin: 24px 0;
   width: 100%;
   height: 1px;
   background-color: ${({ theme }) => theme.colors.cardBorder};
-`
+`;
 
 const StyledCheckbox = styled(Checkbox)`
   min-width: 24px;
-`
+`;
 
 const StyledLabel = styled.label`
   cursor: pointer;
-`
+`;
 
 const StyledButton = styled(Button)`
   color: ${({ theme }) => theme.colors.failure};
-`
+`;
 
 type UseV2ExchangeModalProps = {
-  onDismiss?: () => void
-}
+  onDismiss?: () => void;
+};
 
 const UseV2ExchangeModal = ({ onDismiss = defaultOnDismiss }: UseV2ExchangeModalProps) => {
-  const [isAcknowledged, setIsAcknowledged] = useState(false)
+  const [isAcknowledged, setIsAcknowledged] = useState(false);
 
   useEffect(() => {
     const preventClickHandler = (e) => {
-      e.stopPropagation()
-      e.preventDefault()
-      return false
-    }
+      e.stopPropagation();
+      e.preventDefault();
+      return false;
+    };
 
     document.querySelectorAll('[role="presentation"]').forEach((el) => {
-      el.addEventListener('click', preventClickHandler, true)
-    })
+      el.addEventListener('click', preventClickHandler, true);
+    });
 
     return () => {
       document.querySelectorAll('[role="presentation"]').forEach((el) => {
-        el.removeEventListener('click', preventClickHandler, true)
-      })
-    }
-  }, [])
+        el.removeEventListener('click', preventClickHandler, true);
+      });
+    };
+  }, []);
 
   return (
     <Modal onDismiss={onDismiss} title="Use V2 Exchange" hideCloseButton>
@@ -84,7 +84,7 @@ const UseV2ExchangeModal = ({ onDismiss = defaultOnDismiss }: UseV2ExchangeModal
         </StyledButton>
       </Box>
     </Modal>
-  )
-}
+  );
+};
 
-export default UseV2ExchangeModal
+export default UseV2ExchangeModal;

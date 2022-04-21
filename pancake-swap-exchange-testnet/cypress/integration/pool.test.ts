@@ -1,8 +1,8 @@
 describe('Pool', () => {
-  beforeEach(() => cy.visit('/pool'))
+  beforeEach(() => cy.visit('/pool'));
 
   it('import pool links to /import', () => {
-    cy.get('#import-pool-link').click()
-    cy.url().should('contain', '/find')
-  })
-})
+    cy.get('#import-pool-link').click();
+    cy.url().should('contain', '/find');
+  });
+});

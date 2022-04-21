@@ -1,16 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Text } from '@nguyenphu27/uikit'
-import { Spinner } from '../Shared'
-import { AutoColumn } from '../Column'
-import { Wrapper, Section, ConfirmedIcon, ContentHeader } from './helpers'
+import React from 'react';
+import styled from 'styled-components';
+import { Text } from '@nguyenphu27/uikit';
+import { Spinner } from '../Shared';
+import { AutoColumn } from '../Column';
+import { Wrapper, Section, ConfirmedIcon, ContentHeader } from './helpers';
 
-type ConfirmationPendingContentProps = { onDismiss: () => void; pendingText: string }
+type ConfirmationPendingContentProps = { onDismiss: () => void; pendingText: string };
 
 const CustomLightSpinner = styled(Spinner)<{ size: string }>`
   height: ${({ size }) => size};
   width: ${({ size }) => size};
-`
+`;
 
 const ConfirmationPendingContent = ({ onDismiss, pendingText }: ConfirmationPendingContentProps) => {
   return (
@@ -30,7 +30,7 @@ const ConfirmationPendingContent = ({ onDismiss, pendingText }: ConfirmationPend
         </AutoColumn>
       </Section>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default ConfirmationPendingContent
+export default ConfirmationPendingContent;

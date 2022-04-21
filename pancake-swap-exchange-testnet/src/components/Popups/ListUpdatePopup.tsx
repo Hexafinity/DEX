@@ -1,13 +1,13 @@
-import React, { useCallback, useMemo } from 'react'
-import { diffTokenLists, TokenList } from '@uniswap/token-lists'
-import { Button, Text } from '@nguyenphu27/uikit'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../../state'
-import { useRemovePopup } from '../../state/application/hooks'
-import { acceptListUpdate } from '../../state/lists/actions'
-import listVersionLabel from '../../utils/listVersionLabel'
-import { AutoColumn } from '../Column'
-import { AutoRow } from '../Row'
+import React, { useCallback, useMemo } from 'react';
+import { diffTokenLists, TokenList } from '@uniswap/token-lists';
+import { Button, Text } from '@nguyenphu27/uikit';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../state';
+import { useRemovePopup } from '../../state/application/hooks';
+import { acceptListUpdate } from '../../state/lists/actions';
+import listVersionLabel from '../../utils/listVersionLabel';
+import { AutoColumn } from '../Column';
+import { AutoRow } from '../Row';
 
 export default function ListUpdatePopup({
   popKey,
@@ -16,30 +16,34 @@ export default function ListUpdatePopup({
   newList,
   auto,
 }: {
-  popKey: string
-  listUrl: string
-  oldList: TokenList
-  newList: TokenList
-  auto: boolean
+  popKey: string;
+  listUrl: string;
+  oldList: TokenList;
+  newList: TokenList;
+  auto: boolean;
 }) {
-  const removePopup = useRemovePopup()
-  const removeThisPopup = useCallback(() => removePopup(popKey), [popKey, removePopup])
-  const dispatch = useDispatch<AppDispatch>()
+  const removePopup = useRemovePopup();
+  const removeThisPopup = useCallback(() => removePopup(popKey), [popKey, removePopup]);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleAcceptUpdate = useCallback(() => {
-    if (auto) return
-    dispatch(acceptListUpdate(listUrl))
-    removeThisPopup()
-  }, [auto, dispatch, listUrl, removeThisPopup])
+    if (auto) return;
+    dispatch(acceptListUpdate(listUrl));
+    removeThisPopup();
+  }, [auto, dispatch, listUrl, removeThisPopup]);
 
-  const { added: tokensAdded, changed: tokensChanged, removed: tokensRemoved } = useMemo(() => {
-    return diffTokenLists(oldList.tokens, newList.tokens)
-  }, [newList.tokens, oldList.tokens])
+  const {
+    added: tokensAdded,
+    changed: tokensChanged,
+    removed: tokensRemoved,
+  } = useMemo(() => {
+    return diffTokenLists(oldList.tokens, newList.tokens);
+  }, [newList.tokens, oldList.tokens]);
   const numTokensChanged = useMemo(
     () =>
       Object.keys(tokensChanged).reduce((memo, chainId: any) => memo + Object.keys(tokensChanged[chainId]).length, 0),
     [tokensChanged]
-  )
+  );
 
   return (
     <AutoRow>
@@ -94,5 +98,5 @@ export default function ListUpdatePopup({
         )}
       </AutoColumn>
     </AutoRow>
-  )
+  );
 }

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { Box, Button, Flex, Input, Text } from '@nguyenphu27/uikit'
-import { useUserSlippageTolerance } from 'state/user/hooks'
-import QuestionHelper from '../QuestionHelper'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { Box, Button, Flex, Input, Text } from '@nguyenphu27/uikit';
+import { useUserSlippageTolerance } from 'state/user/hooks';
+import QuestionHelper from '../QuestionHelper';
 
-const MAX_SLIPPAGE = 5000
-const RISKY_SLIPPAGE_LOW = 50
-const RISKY_SLIPPAGE_HIGH = 500
+const MAX_SLIPPAGE = 5000;
+const RISKY_SLIPPAGE_LOW = 50;
+const RISKY_SLIPPAGE_HIGH = 500;
 
 const Option = styled.div`
   padding: 0 4px;
-`
+`;
 
 const Options = styled.div`
   align-items: center;
@@ -28,50 +28,50 @@ const Options = styled.div`
   ${({ theme }) => theme.mediaQueries.sm} {
     flex-direction: row;
   }
-`
+`;
 
 const predefinedValues = [
   { label: '0.1%', value: 0.1 },
   { label: '0.5%', value: 0.5 },
   { label: '1%', value: 1 },
-]
+];
 
 type SlippageToleranceSettingsModalProps = {
-  translateString: (translationId: number, fallback: string) => string
-}
+  translateString: (translationId: number, fallback: string) => string;
+};
 
 const SlippageToleranceSettings = ({ translateString }: SlippageToleranceSettingsModalProps) => {
-  const [userSlippageTolerance, setUserslippageTolerance] = useUserSlippageTolerance()
-  const [value, setValue] = useState(userSlippageTolerance / 100)
-  const [error, setError] = useState<string | null>(null)
+  const [userSlippageTolerance, setUserslippageTolerance] = useUserSlippageTolerance();
+  const [value, setValue] = useState(userSlippageTolerance / 100);
+  const [error, setError] = useState<string | null>(null);
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const { value: inputValue } = evt.target
-    setValue(parseFloat(inputValue))
-  }
+    const { value: inputValue } = evt.target;
+    setValue(parseFloat(inputValue));
+  };
 
   // Updates local storage if value is valid
   useEffect(() => {
     try {
-      const rawValue = value * 100
+      const rawValue = value * 100;
       if (!Number.isNaN(rawValue) && rawValue > 0 && rawValue < MAX_SLIPPAGE) {
-        setUserslippageTolerance(rawValue)
-        setError(null)
+        setUserslippageTolerance(rawValue);
+        setError(null);
       } else {
-        setError(translateString(1144, 'Enter a valid slippage percentage'))
+        setError(translateString(1144, 'Enter a valid slippage percentage'));
       }
     } catch {
-      setError(translateString(1144, 'Enter a valid slippage percentage'))
+      setError(translateString(1144, 'Enter a valid slippage percentage'));
     }
-  }, [value, setError, setUserslippageTolerance, translateString])
+  }, [value, setError, setUserslippageTolerance, translateString]);
 
   // Notify user if slippage is risky
   useEffect(() => {
     if (userSlippageTolerance < RISKY_SLIPPAGE_LOW) {
-      setError(translateString(1146, 'Your transaction may fail'))
+      setError(translateString(1146, 'Your transaction may fail'));
     } else if (userSlippageTolerance > RISKY_SLIPPAGE_HIGH) {
-      setError(translateString(1148, 'Your transaction may be frontrun'))
+      setError(translateString(1148, 'Your transaction may be frontrun'));
     }
-  }, [userSlippageTolerance, setError, translateString])
+  }, [userSlippageTolerance, setError, translateString]);
 
   return (
     <Box mb="16px">
@@ -87,7 +87,7 @@ const SlippageToleranceSettings = ({ translateString }: SlippageToleranceSetting
       <Options>
         <Flex mb={['8px', '8px', 0]} mr={[0, 0, '8px']}>
           {predefinedValues.map(({ label, value: predefinedValue }) => {
-            const handleClick = () => setValue(predefinedValue)
+            const handleClick = () => setValue(predefinedValue);
 
             return (
               <Option key={predefinedValue}>
@@ -95,7 +95,7 @@ const SlippageToleranceSettings = ({ translateString }: SlippageToleranceSetting
                   {label}
                 </Button>
               </Option>
-            )
+            );
           })}
         </Flex>
         <Flex alignItems="center">
@@ -122,7 +122,7 @@ const SlippageToleranceSettings = ({ translateString }: SlippageToleranceSetting
         </Text>
       )}
     </Box>
-  )
-}
+  );
+};
 
-export default SlippageToleranceSettings
+export default SlippageToleranceSettings;

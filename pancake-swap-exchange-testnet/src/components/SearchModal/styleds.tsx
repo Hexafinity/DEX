@@ -1,16 +1,16 @@
-import styled from 'styled-components'
-import { AutoColumn } from '../Column'
-import { RowBetween, RowFixed } from '../Row'
+import styled from 'styled-components';
+import { AutoColumn } from '../Column';
+import { RowBetween, RowFixed } from '../Row';
 
 export const FadedSpan = styled(RowFixed)`
   color: ${({ theme }) => theme.colors.primary};
   font-size: 14px;
-`
+`;
 
 export const PaddedColumn = styled(AutoColumn)`
   padding: 20px;
   padding-bottom: 12px;
-`
+`;
 
 export const MenuItem = styled(RowBetween)`
   padding: 4px 20px;
@@ -24,7 +24,7 @@ export const MenuItem = styled(RowBetween)`
     background-color: ${({ theme, disabled }) => !disabled && theme.colors.invertedContrast};
   }
   opacity: ${({ disabled, selected }) => (disabled || selected ? 0.5 : 1)};
-`
+`;
 
 export const SearchInput = styled.input`
   position: relative;
@@ -52,15 +52,15 @@ export const SearchInput = styled.input`
     border: 1px solid ${({ theme }) => theme.colors.primary};
     outline: none;
   }
-`
+`;
 export const Separator = styled.div`
   width: 100%;
   height: 1px;
   background-color: ${({ theme }) => theme.colors.invertedContrast};
-`
+`;
 
 export const SeparatorDark = styled.div`
   width: 100%;
   height: 1px;
   background-color: ${({ theme }) => theme.colors.tertiary};
-`
+`;

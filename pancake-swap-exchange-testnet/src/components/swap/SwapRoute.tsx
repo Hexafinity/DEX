@@ -1,13 +1,13 @@
-import { Trade } from '@nguyenphu27/sdk'
-import React, { Fragment, memo, useContext } from 'react'
-import { ChevronRight } from 'react-feather'
-import { Flex, Text } from '@nguyenphu27/uikit'
-import { ThemeContext } from 'styled-components'
-import CurrencyLogo from '../CurrencyLogo'
+import { Trade } from '@nguyenphu27/sdk';
+import React, { Fragment, memo, useContext } from 'react';
+import { ChevronRight } from 'react-feather';
+import { Flex, Text } from '@nguyenphu27/uikit';
+import { ThemeContext } from 'styled-components';
+import CurrencyLogo from '../CurrencyLogo';
 
 export default memo(function SwapRoute({ trade }: { trade: Trade }) {
   // @ts-ignore
-  const theme = useContext(ThemeContext)
+  const theme = useContext(ThemeContext);
   return (
     <Flex
       px="1rem"
@@ -19,7 +19,7 @@ export default memo(function SwapRoute({ trade }: { trade: Trade }) {
       alignItems="center"
     >
       {trade.route.path.map((token, i, path) => {
-        const isLastItem: boolean = i === path.length - 1
+        const isLastItem: boolean = i === path.length - 1;
         return (
           // eslint-disable-next-line react/no-array-index-key
           <Fragment key={i}>
@@ -31,8 +31,8 @@ export default memo(function SwapRoute({ trade }: { trade: Trade }) {
             </Flex>
             {isLastItem ? null : <ChevronRight color="textSubtle" />}
           </Fragment>
-        )
+        );
       })}
     </Flex>
-  )
-})
+  );
+});

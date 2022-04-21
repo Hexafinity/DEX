@@ -1,22 +1,22 @@
-import React from 'react'
-import { Trade, TradeType } from '@nguyenphu27/sdk'
-import { Card, CardBody, Text } from '@nguyenphu27/uikit'
-import useI18n from 'hooks/useI18n'
-import { Field } from '../../state/swap/actions'
-import { useUserSlippageTolerance } from '../../state/user/hooks'
-import { computeSlippageAdjustedAmounts, computeTradePriceBreakdown } from '../../utils/prices'
-import { AutoColumn } from '../Column'
-import QuestionHelper from '../QuestionHelper'
-import { RowBetween, RowFixed } from '../Row'
-import FormattedPriceImpact from './FormattedPriceImpact'
-import { SectionBreak } from './styleds'
-import SwapRoute from './SwapRoute'
+import React from 'react';
+import { Trade, TradeType } from '@nguyenphu27/sdk';
+import { Card, CardBody, Text } from '@nguyenphu27/uikit';
+import useI18n from 'hooks/useI18n';
+import { Field } from '../../state/swap/actions';
+import { useUserSlippageTolerance } from '../../state/user/hooks';
+import { computeSlippageAdjustedAmounts, computeTradePriceBreakdown } from '../../utils/prices';
+import { AutoColumn } from '../Column';
+import QuestionHelper from '../QuestionHelper';
+import { RowBetween, RowFixed } from '../Row';
+import FormattedPriceImpact from './FormattedPriceImpact';
+import { SectionBreak } from './styleds';
+import SwapRoute from './SwapRoute';
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
-  const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(trade)
-  const isExactIn = trade.tradeType === TradeType.EXACT_INPUT
-  const slippageAdjustedAmounts = computeSlippageAdjustedAmounts(trade, allowedSlippage)
-  const TranslateString = useI18n()
+  const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(trade);
+  const isExactIn = trade.tradeType === TradeType.EXACT_INPUT;
+  const slippageAdjustedAmounts = computeSlippageAdjustedAmounts(trade, allowedSlippage);
+  const TranslateString = useI18n();
 
   return (
     <Card>
@@ -45,7 +45,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
         </RowBetween>
         <RowBetween>
           <RowFixed>
-            <Text fontSize='14px'>{TranslateString(226, 'Price Impact')}</Text>
+            <Text fontSize="14px">{TranslateString(226, 'Price Impact')}</Text>
             <QuestionHelper
               text={TranslateString(
                 224,
@@ -72,17 +72,17 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
         </RowBetween>
       </CardBody>
     </Card>
-  )
+  );
 }
 
 export interface AdvancedSwapDetailsProps {
-  trade?: Trade
+  trade?: Trade;
 }
 
 export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
-  const [allowedSlippage] = useUserSlippageTolerance()
-  const TranslateString = useI18n()
-  const showRoute = Boolean(trade && trade.route.path.length > 2)
+  const [allowedSlippage] = useUserSlippageTolerance();
+  const TranslateString = useI18n();
+  const showRoute = Boolean(trade && trade.route.path.length > 2);
 
   return (
     <AutoColumn gap="md">
@@ -109,5 +109,5 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
         </>
       )}
     </AutoColumn>
-  )
+  );
 }

@@ -1,28 +1,28 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Heading, Card, CardHeader, CardBody, Text, Button, Link, Flex, ArrowDownIcon } from '@nguyenphu27/uikit'
-import Container from 'components/Container'
-import FirstCard from './FirstCard'
-import SecondCard from './SecondCard'
-import FAQ from './FAQ'
+import React from 'react';
+import styled from 'styled-components';
+import { Heading, Card, CardHeader, CardBody, Text, Button, Link, Flex, ArrowDownIcon } from '@nguyenphu27/uikit';
+import Container from 'components/Container';
+import FirstCard from './FirstCard';
+import SecondCard from './SecondCard';
+import FAQ from './FAQ';
 
 const Wrapper = styled.div`
   max-width: 436px;
   width: 100%;
   z-index: 5;
-`
+`;
 
 const Header = styled.div`
   background: ${({ theme }) => theme.colors.gradients.bubblegum};
   width: 100%;
   padding: 32px;
-`
+`;
 
 const ArrowSeparator = () => (
   <Flex justifyContent="center" my="24px">
     <ArrowDownIcon color="textSubtle" width="24px" />
   </Flex>
-)
+);
 
 const Migration = () => {
   return (
@@ -78,7 +78,7 @@ const Migration = () => {
       </Container>
       <FAQ />
     </>
-  )
-}
+  );
+};
 
-export default Migration
+export default Migration;

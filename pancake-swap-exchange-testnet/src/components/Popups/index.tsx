@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useActivePopups } from '../../state/application/hooks'
-import { AutoColumn } from '../Column'
-import PopupItem from './PopupItem'
+import React from 'react';
+import styled from 'styled-components';
+import { useActivePopups } from '../../state/application/hooks';
+import { AutoColumn } from '../Column';
+import PopupItem from './PopupItem';
 
 const MobilePopupWrapper = styled.div<{ height: string | number }>`
   position: relative;
@@ -15,7 +15,7 @@ const MobilePopupWrapper = styled.div<{ height: string | number }>`
   ${({ theme }) => theme.mediaQueries.sm} {
     display: block;
   }
-`
+`;
 
 const MobilePopupInner = styled.div`
   height: 99%;
@@ -27,7 +27,7 @@ const MobilePopupInner = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
-`
+`;
 
 const FixedPopupColumn = styled(AutoColumn)`
   position: fixed;
@@ -40,11 +40,11 @@ const FixedPopupColumn = styled(AutoColumn)`
   ${({ theme }) => theme.mediaQueries.sm} {
     display: none;
   }
-`
+`;
 
 export default function Popups() {
   // get all popups
-  const activePopups = useActivePopups()
+  const activePopups = useActivePopups();
 
   return (
     <>
@@ -64,5 +64,5 @@ export default function Popups() {
         </MobilePopupInner>
       </MobilePopupWrapper>
     </>
-  )
+  );
 }

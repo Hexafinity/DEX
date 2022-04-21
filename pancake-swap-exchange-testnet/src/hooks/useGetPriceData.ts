@@ -1,38 +1,38 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 type ApiResponse = {
-  updated_at: string
+  updated_at: string;
   data: {
     [key: string]: {
-      name: string
-      symbol: string
-      price: string
-      price_BNB: string
-    }
-  }
-}
+      name: string;
+      symbol: string;
+      price: string;
+      price_BNB: string;
+    };
+  };
+};
 
-const api = 'https://api.pancakeswap.info/api/tokens'
+const api = 'https://api.pancakeswap.info/api/tokens';
 
 const useGetPriceData = () => {
-  const [data, setData] = useState<ApiResponse | null>(null)
+  const [data, setData] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(api)
-        const res: ApiResponse = await response.json()
+        const response = await fetch(api);
+        const res: ApiResponse = await response.json();
 
-        setData(res)
+        setData(res);
       } catch (error) {
-        console.error('Unable to fetch price data:', error)
+        console.error('Unable to fetch price data:', error);
       }
-    }
+    };
 
-    fetchData()
-  }, [setData])
+    fetchData();
+  }, [setData]);
 
-  return data
-}
+  return data;
+};
 
-export default useGetPriceData
+export default useGetPriceData;

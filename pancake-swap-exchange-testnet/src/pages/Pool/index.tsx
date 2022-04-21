@@ -1,45 +1,46 @@
-import React, { useContext, useMemo } from 'react'
-import { ThemeContext } from 'styled-components'
-import { Pair } from '@nguyenphu27/sdk'
-import { Button, CardBody, Text } from '@nguyenphu27/uikit'
-import CardNav from 'components/CardNav'
-import Question from 'components/QuestionHelper'
-import FullPositionCard from 'components/PositionCard'
-import { useTokenBalancesWithLoadingIndicator } from 'state/wallet/hooks'
-import { StyledInternalLink } from 'components/Shared'
-import { LightCard } from 'components/Card'
-import { RowBetween } from 'components/Row'
-import { AutoColumn } from 'components/Column'
-import Container from 'components/Container'
+import React, { useContext, useMemo } from 'react';
+import { ThemeContext } from 'styled-components';
+import { Pair } from '@nguyenphu27/sdk';
+import { Button, CardBody, Text } from '@nguyenphu27/uikit';
+import CardNav from 'components/CardNav';
+import Question from 'components/QuestionHelper';
+import FullPositionCard from 'components/PositionCard';
+import { useTokenBalancesWithLoadingIndicator } from 'state/wallet/hooks';
+import { StyledInternalLink } from 'components/Shared';
+import { LightCard } from 'components/Card';
+import { RowBetween } from 'components/Row';
+import { AutoColumn } from 'components/Column';
+import Container from 'components/Container';
 
-import { useActiveWeb3React } from 'hooks'
-import { usePairs } from 'data/Reserves'
-import { toV2LiquidityToken, useTrackedTokenPairs } from 'state/user/hooks'
-import { Dots } from 'components/swap/styleds'
-import useI18n from 'hooks/useI18n'
-import PageHeader from 'components/PageHeader'
-import { Link } from 'react-router-dom'
-import AppBody from '../AppBody'
+import { useActiveWeb3React } from 'hooks';
+import { usePairs } from 'data/Reserves';
+import { toV2LiquidityToken, useTrackedTokenPairs } from 'state/user/hooks';
+import { Dots } from 'components/swap/styleds';
+import useI18n from 'hooks/useI18n';
+import PageHeader from 'components/PageHeader';
+import { Link } from 'react-router-dom';
+import AppBody from '../AppBody';
 
 export default function Pool() {
   // @ts-ignore
-  const theme = useContext(ThemeContext)
-  const { account } = useActiveWeb3React()
-  const TranslateString = useI18n()
+  const theme = useContext(ThemeContext);
+  const { account } = useActiveWeb3React();
+  const TranslateString = useI18n();
 
   // fetch the user's balances of all tracked V2 LP tokens
-  const trackedTokenPairs = useTrackedTokenPairs()
+  const trackedTokenPairs = useTrackedTokenPairs();
   const tokenPairsWithLiquidityTokens = useMemo(
     () => trackedTokenPairs.map((tokens) => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
     [trackedTokenPairs]
-  )
-  const liquidityTokens = useMemo(() => tokenPairsWithLiquidityTokens.map((tpwlt) => tpwlt.liquidityToken), [
-    tokenPairsWithLiquidityTokens,
-  ])
+  );
+  const liquidityTokens = useMemo(
+    () => tokenPairsWithLiquidityTokens.map((tpwlt) => tpwlt.liquidityToken),
+    [tokenPairsWithLiquidityTokens]
+  );
   const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
     account ?? undefined,
     liquidityTokens
-  )
+  );
 
   // fetch the reserves for all V2 pools in which the user has a balance
   const liquidityTokensWithBalances = useMemo(
@@ -48,13 +49,15 @@ export default function Pool() {
         v2PairsBalances[liquidityToken.address]?.greaterThan('0')
       ),
     [tokenPairsWithLiquidityTokens, v2PairsBalances]
-  )
+  );
 
-  const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
+  const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens));
   const v2IsLoading =
-    fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some((V2Pair) => !V2Pair)
+    fetchingV2PairBalances ||
+    v2Pairs?.length < liquidityTokensWithBalances.length ||
+    v2Pairs?.some((V2Pair) => !V2Pair);
 
-  const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
+  const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair));
 
   return (
     <Container>
@@ -123,5 +126,5 @@ export default function Pool() {
         </AutoColumn>
       </AppBody>
     </Container>
-  )
+  );
 }

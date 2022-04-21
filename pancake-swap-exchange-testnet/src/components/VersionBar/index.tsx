@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Text, Button, InfoIcon, Link } from '@nguyenphu27/uikit'
+import React from 'react';
+import styled from 'styled-components';
+import { Text, Button, InfoIcon, Link } from '@nguyenphu27/uikit';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     padding-left: 240px;
   }
-`
+`;
 
 const VersionBar = () => {
   return (
@@ -36,7 +36,7 @@ const VersionBar = () => {
         Github
       </Button>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default VersionBar
+export default VersionBar;

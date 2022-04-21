@@ -1,21 +1,21 @@
-import { Trade, TradeType } from '@nguyenphu27/sdk'
-import React, { useMemo, useState } from 'react'
-import { Text, Button } from '@nguyenphu27/uikit'
-import { Repeat } from 'react-feather'
+import { Trade, TradeType } from '@nguyenphu27/sdk';
+import React, { useMemo, useState } from 'react';
+import { Text, Button } from '@nguyenphu27/uikit';
+import { Repeat } from 'react-feather';
 
-import useI18n from 'hooks/useI18n'
-import { Field } from '../../state/swap/actions'
+import useI18n from 'hooks/useI18n';
+import { Field } from '../../state/swap/actions';
 import {
   computeSlippageAdjustedAmounts,
   computeTradePriceBreakdown,
   formatExecutionPrice,
   warningSeverity,
-} from '../../utils/prices'
-import { AutoColumn } from '../Column'
-import QuestionHelper from '../QuestionHelper'
-import { AutoRow, RowBetween, RowFixed } from '../Row'
-import FormattedPriceImpact from './FormattedPriceImpact'
-import { StyledBalanceMaxMini, SwapCallbackError } from './styleds'
+} from '../../utils/prices';
+import { AutoColumn } from '../Column';
+import QuestionHelper from '../QuestionHelper';
+import { AutoRow, RowBetween, RowFixed } from '../Row';
+import FormattedPriceImpact from './FormattedPriceImpact';
+import { StyledBalanceMaxMini, SwapCallbackError } from './styleds';
 
 export default function SwapModalFooter({
   trade,
@@ -24,20 +24,20 @@ export default function SwapModalFooter({
   swapErrorMessage,
   disabledConfirm,
 }: {
-  trade: Trade
-  allowedSlippage: number
-  onConfirm: () => void
-  swapErrorMessage: string | undefined
-  disabledConfirm: boolean
+  trade: Trade;
+  allowedSlippage: number;
+  onConfirm: () => void;
+  swapErrorMessage: string | undefined;
+  disabledConfirm: boolean;
 }) {
-  const [showInverted, setShowInverted] = useState<boolean>(false)
-  const slippageAdjustedAmounts = useMemo(() => computeSlippageAdjustedAmounts(trade, allowedSlippage), [
-    allowedSlippage,
-    trade,
-  ])
-  const { priceImpactWithoutFee, realizedLPFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade])
-  const severity = warningSeverity(priceImpactWithoutFee)
-  const TranslateString = useI18n()
+  const [showInverted, setShowInverted] = useState<boolean>(false);
+  const slippageAdjustedAmounts = useMemo(
+    () => computeSlippageAdjustedAmounts(trade, allowedSlippage),
+    [allowedSlippage, trade]
+  );
+  const { priceImpactWithoutFee, realizedLPFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade]);
+  const severity = warningSeverity(priceImpactWithoutFee);
+  const TranslateString = useI18n();
 
   return (
     <>
@@ -129,5 +129,5 @@ export default function SwapModalFooter({
         {swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
       </AutoRow>
     </>
-  )
+  );
 }

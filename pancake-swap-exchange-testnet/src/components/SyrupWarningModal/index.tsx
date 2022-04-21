@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react'
-import styled from 'styled-components'
-import { Button, Text } from '@nguyenphu27/uikit'
-import { AlertTriangle } from 'react-feather'
-import Modal from '../Modal'
-import { AutoRow, RowBetween } from '../Row'
-import { AutoColumn } from '../Column'
+import React, { useCallback, useState } from 'react';
+import styled from 'styled-components';
+import { Button, Text } from '@nguyenphu27/uikit';
+import { AlertTriangle } from 'react-feather';
+import Modal from '../Modal';
+import { AutoRow, RowBetween } from '../Row';
+import { AutoColumn } from '../Column';
 
 const WarningContainer = styled.div`
   max-width: 420px;
@@ -14,25 +14,25 @@ const WarningContainer = styled.div`
   border: 1px solid #f3841e;
   border-radius: 20px;
   overflow: auto;
-`
+`;
 
 const StyledWarningIcon = styled(AlertTriangle)`
   stroke: ${({ theme }) => theme.colors.failure};
-`
+`;
 
 export default function SyrupWarningModal({
   isOpen,
   transactionType,
   onConfirm,
 }: {
-  isOpen: boolean
-  transactionType: string | null
-  onConfirm: () => void
+  isOpen: boolean;
+  transactionType: string | null;
+  onConfirm: () => void;
 }) {
-  const [understandChecked, setUnderstandChecked] = useState(false)
-  const toggleUnderstand = useCallback(() => setUnderstandChecked((uc) => !uc), [])
+  const [understandChecked, setUnderstandChecked] = useState(false);
+  const toggleUnderstand = useCallback(() => setUnderstandChecked((uc) => !uc), []);
 
-  const handleDismiss = useCallback(() => null, [])
+  const handleDismiss = useCallback(() => null, []);
   return (
     <Modal isOpen={isOpen} onDismiss={handleDismiss} maxHeight={90}>
       <WarningContainer className="token-warning-container">
@@ -71,8 +71,8 @@ export default function SyrupWarningModal({
               variant="danger"
               style={{ width: '140px' }}
               onClick={() => {
-                setUnderstandChecked(false)
-                onConfirm()
+                setUnderstandChecked(false);
+                onConfirm();
               }}
             >
               Continue
@@ -81,5 +81,5 @@ export default function SyrupWarningModal({
         </AutoColumn>
       </WarningContainer>
     </Modal>
-  )
+  );
 }
