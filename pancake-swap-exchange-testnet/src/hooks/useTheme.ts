@@ -4,6 +4,7 @@ import { ThemeContext } from '../ThemeContext'
 
 const useTheme = () => {
   const { isDark, toggleTheme } = useContext(ThemeContext)
+  // @ts-ignore
   const theme = useContext(StyledThemeCopntext)
   return { isDark, toggleTheme, theme }
 }

@@ -14,6 +14,7 @@ type TransactionSubmittedContentProps = {
 }
 
 const TransactionSubmittedContent = ({ onDismiss, chainId, hash }: TransactionSubmittedContentProps) => {
+  // @ts-ignore
   const theme = useContext(ThemeContext)
 
   return (

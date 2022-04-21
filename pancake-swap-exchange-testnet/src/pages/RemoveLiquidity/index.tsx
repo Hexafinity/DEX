@@ -68,6 +68,7 @@ export default function RemoveLiquidity({
     chainId,
   ])
 
+  // @ts-ignore
   const theme = useContext(ThemeContext)
 
   // burn state

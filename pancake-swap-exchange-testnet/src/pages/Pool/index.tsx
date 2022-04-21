@@ -22,6 +22,7 @@ import { Link } from 'react-router-dom'
 import AppBody from '../AppBody'
 
 export default function Pool() {
+  // @ts-ignore
   const theme = useContext(ThemeContext)
   const { account } = useActiveWeb3React()
   const TranslateString = useI18n()

@@ -32,7 +32,7 @@ const useAuth = () => {
         ) {
           if (connector instanceof WalletConnectConnector) {
             const walletConnector = connector as WalletConnectConnector
-            walletConnector.walletConnectProvider = null
+            walletConnector.walletConnectProvider = undefined
           }
           toastError('Authorization Error', 'Please authorize to access your account')
         } else {
