@@ -12,10 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@truffle/hdwallet-provider": "^1.2.6",
-    "dotenv": "^10.0.0"
+    "@truffle/hdwallet-provider": "^2.0.7",
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
-    "truffle-plugin-verify": "^0.5.7"
+    "truffle-plugin-verify": "^0.5.25"
   }
 }
