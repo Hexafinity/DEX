@@ -70,6 +70,7 @@ module.exports = {
       network_id: 97, // Ropsten's id
       gas: 20000000, // Ropsten has a lower block limit than mainnet
       confirmations: 2, // # of confs to wait between deployments. (default: 0)
+      networkCheckTimeoutnetworkCheckTimeout: 10000,
       timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
     },
@@ -124,6 +125,6 @@ module.exports = {
 
   // Bsc API
   api_keys: {
-    etherscan: process.env.BSC_API,
+    bscscan: process.env.BSC_API,
   },
 };

@@ -28,6 +28,8 @@ interface IPancakeFactory {
 
     function swapFeeTo() external view returns (address);
 
+    function swapFee() external view returns (uint256);
+
     function feeToSetter() external view returns (address);
 
     function getPair(address tokenA, address tokenB)
@@ -46,6 +48,8 @@ interface IPancakeFactory {
     function setFeeTo(address) external;
 
     function setSwapFeeTo(address) external;
+
+    function setSwapFee(uint256) external;
 
     function setFeeToSetter(address) external;
 }
@@ -445,7 +449,6 @@ contract PancakePair is IPancakePair, PancakeERC20 {
     using UQ112x112 for uint224;
 
     uint256 public constant MINIMUM_LIQUIDITY = 10**3;
-    uint256 public constant SWAP_FEE = 20;
     uint256 public constant SWAP_FEE_DIVIDER = 10**4;
     bytes4 private constant SELECTOR =
         bytes4(keccak256(bytes("transfer(address,uint256)")));
@@ -668,7 +671,7 @@ contract PancakePair is IPancakePair, PancakeERC20 {
             if (amount0Out > 0) {
                 uint256 _amount0Out = amount0Out;
                 if (feeOn) {
-                    uint256 _fee0Out = _amount0Out.mul(SWAP_FEE).div(SWAP_FEE_DIVIDER);
+                    uint256 _fee0Out = _amount0Out.mul(IPancakeFactory(factory).swapFee()).div(SWAP_FEE_DIVIDER);
                     if (_fee0Out > 0) {
                         _amount0Out = _amount0Out.sub(_fee0Out);
                         _safeTransfer(_token0, IPancakeFactory(factory).swapFeeTo(), _fee0Out);
@@ -679,7 +682,7 @@ contract PancakePair is IPancakePair, PancakeERC20 {
             if (amount1Out > 0) {
                 uint256 _amount1Out = amount1Out;
                 if (feeOn) {
-                    uint256 _fee1Out = _amount1Out.mul(SWAP_FEE).div(SWAP_FEE_DIVIDER);
+                    uint256 _fee1Out = _amount1Out.mul(IPancakeFactory(factory).swapFee()).div(SWAP_FEE_DIVIDER);
                     if (_fee1Out > 0) {
                         _amount1Out = _amount1Out.sub(_fee1Out);
                         _safeTransfer(_token1, IPancakeFactory(factory).swapFeeTo(), _fee1Out);
@@ -759,6 +762,7 @@ contract PancakeFactoryV2 is IPancakeFactory {
 
     address public feeTo;
     address public swapFeeTo;
+    uint256 public swapFee;
     address public feeToSetter;
 
     mapping(address => mapping(address => address)) public getPair;
@@ -809,6 +813,11 @@ contract PancakeFactoryV2 is IPancakeFactory {
     function setSwapFeeTo(address _feeTo) external {
         require(msg.sender == feeToSetter, "Pancake: FORBIDDEN");
         swapFeeTo = _feeTo;
+    }
+
+    function setSwapFee(uint256 _fee) external {
+        require(msg.sender == feeToSetter, "Pancake: FORBIDDEN");
+        swapFee = _fee;
     }
 
     function setFeeToSetter(address _feeToSetter) external {

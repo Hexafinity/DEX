@@ -9,7 +9,7 @@
 const PancakeRouterV2 = artifacts.require("PancakeRouterV2");
 
 let weth = "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd";
-let factory = "0xd68A8fFA49f05BFfC7664b60f7D33da30e196F32";
+let factory = "0x2D86172bAA0B6537D1b96428A13DcE70B04F9737";
 
 module.exports = function (deployer) {
   deployer.deploy(PancakeRouterV2, factory, weth);
