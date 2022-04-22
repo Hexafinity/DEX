@@ -1,5 +1,5 @@
 {
-  "name": "@nguyenphu27/sdk",
+  "name": "@hexafinity/swap-sdk",
   "license": "MIT",
   "version": "1.0.1",
   "description": "🛠 An SDK for building applications on top of Pancakeswap.",
@@ -8,7 +8,7 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/nguyenphu27/pancake-swap-sdk-testnett",
+  "repository": "https://github.com/Hexafinity/DEX/tree/main/pancake-swap-sdk-testnet",
   "keywords": [
     "pancakeswap",
     "bsc"
