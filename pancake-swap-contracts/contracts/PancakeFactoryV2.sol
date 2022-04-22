@@ -26,6 +26,10 @@ interface IPancakeFactory {
 
     function feeTo() external view returns (address);
 
+    function swapFeeTo() external view returns (address);
+
+    function swapFee() external view returns (uint16);
+
     function feeToSetter() external view returns (address);
 
     function getPair(address tokenA, address tokenB)
@@ -42,6 +46,10 @@ interface IPancakeFactory {
         returns (address pair);
 
     function setFeeTo(address) external;
+
+    function setSwapFeeTo(address) external;
+
+    function setSwapFee(uint16) external;
 
     function setFeeToSetter(address) external;
 }
@@ -646,6 +654,10 @@ contract PancakePair is IPancakePair, PancakeERC20 {
             "Pancake: INSUFFICIENT_LIQUIDITY"
         );
 
+        address feeTo = IPancakeFactory(factory).swapFeeTo();
+        uint16 _swapFee = IPancakeFactory(factory).swapFee();
+        bool feeOn = feeTo != address(0);
+
         uint256 balance0;
         uint256 balance1;
         {
@@ -653,8 +665,28 @@ contract PancakePair is IPancakePair, PancakeERC20 {
             address _token0 = token0;
             address _token1 = token1;
             require(to != _token0 && to != _token1, "Pancake: INVALID_TO");
-            if (amount0Out > 0) _safeTransfer(_token0, to, amount0Out); // optimistically transfer tokens
-            if (amount1Out > 0) _safeTransfer(_token1, to, amount1Out); // optimistically transfer tokens
+            if (amount0Out > 0) {
+                uint256 amount0Out_ = amount0Out;
+                if (feeOn) {
+                    uint256 fee0Out_ = amount0Out.mul(_swapFee).div(10 * 4);
+                    if (fee0Out_ > 0) {
+                        amount0Out_ = amount0Out_.sub(fee0Out_);
+                        _safeTransfer(_token0, feeTo, fee0Out_);
+                    }
+                }
+                safeTransfer(_token0, to, amount0Out_);
+            } // optimistically transfer tokens
+            if (amount1Out > 0) {
+                uint256 amount1Out_ = amount1Out;
+                if (feeOn) {
+                    uint256 fee1Out_ = amount1Out.mul(_swapFee).div(10 * 4);
+                    if (fee1Out_ > 0) {
+                        amount1Out_ = amount1Out_.sub(fee1Out_);
+                        _safeTransfer(_token1, feeTo, fee1Out_);
+                    }
+                }
+                _safeTransfer(_token1, to, amount1Out_); // optimistically transfer tokens
+            }
             if (data.length > 0)
                 IPancakeCallee(to).pancakeCall(
                     msg.sender,
@@ -726,6 +758,8 @@ contract PancakeFactoryV2 is IPancakeFactory {
         keccak256(abi.encodePacked(type(PancakePair).creationCode));
 
     address public feeTo;
+    address public swapFeeTo;
+    uint16 public swapFee;
     address public feeToSetter;
 
     mapping(address => mapping(address => address)) public getPair;
@@ -771,6 +805,16 @@ contract PancakeFactoryV2 is IPancakeFactory {
     function setFeeTo(address _feeTo) external {
         require(msg.sender == feeToSetter, "Pancake: FORBIDDEN");
         feeTo = _feeTo;
+    }
+
+    function setSwapFeeTo(address _feeTo) external {
+        require(msg.sender == feeToSetter, "Pancake: FORBIDDEN");
+        swapFeeTo = _feeTo;
+    }
+
+    function setSwapFee(uint16 _fee) external {
+        require(msg.sender == feeToSetter, "Pancake: FORBIDDEN");
+        swapFee = _fee;
     }
 
     function setFeeToSetter(address _feeToSetter) external {
