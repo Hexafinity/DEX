@@ -1,7 +1,7 @@
 import React from 'react';
 import { Trade, TradeType } from '@nguyenphu27/sdk';
 import { Card, CardBody, Text } from '@nguyenphu27/uikit';
-import useI18n from 'hooks/useI18n';
+import useI18n from '../../hooks/useI18n';
 import { Field } from '../../state/swap/actions';
 import { useUserSlippageTolerance } from '../../state/user/hooks';
 import { computeSlippageAdjustedAmounts, computeTradePriceBreakdown } from '../../utils/prices';
@@ -13,7 +13,7 @@ import { SectionBreak } from './styleds';
 import SwapRoute from './SwapRoute';
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
-  const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(trade);
+  const { priceImpactWithoutFee, realizedLPFee, realizedSwappingFee } = computeTradePriceBreakdown(trade);
   const isExactIn = trade.tradeType === TradeType.EXACT_INPUT;
   const slippageAdjustedAmounts = computeSlippageAdjustedAmounts(trade, allowedSlippage);
   const TranslateString = useI18n();
@@ -55,7 +55,6 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
           </RowFixed>
           <FormattedPriceImpact priceImpact={priceImpactWithoutFee} />
         </RowBetween>
-
         <RowBetween>
           <RowFixed>
             <Text fontSize="14px">{TranslateString(228, 'Liquidity Provider Fee')}</Text>
@@ -68,6 +67,15 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
           </RowFixed>
           <Text fontSize="14px">
             {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
+          </Text>
+        </RowBetween>
+        <RowBetween>
+          <RowFixed>
+            <Text fontSize="14px">{TranslateString(2228, 'Swapping Fee')}</Text>
+            <QuestionHelper text={TranslateString(2230, 'For each trade a 0.2% fee is paid as swapping fee.')} />
+          </RowFixed>
+          <Text fontSize="14px">
+            {realizedSwappingFee ? `${realizedSwappingFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
           </Text>
         </RowBetween>
       </CardBody>

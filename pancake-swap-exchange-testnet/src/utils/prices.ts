@@ -10,13 +10,16 @@ import { Field } from '../state/swap/actions';
 import { basisPointsToPercent } from './index';
 
 const BASE_FEE = new Percent(JSBI.BigInt(20), JSBI.BigInt(10000));
+const SWAPPING_FEE = new Percent(JSBI.BigInt(20), JSBI.BigInt(10000));
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000));
 const INPUT_FRACTION_AFTER_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE);
+const INPUT_FRACTiON_AFTER_SWAPPING_FEE = ONE_HUNDRED_PERCENT.subtract(SWAPPING_FEE);
 
 // computes price breakdown for the trade
 export function computeTradePriceBreakdown(trade?: Trade): {
   priceImpactWithoutFee?: Percent;
   realizedLPFee?: CurrencyAmount;
+  realizedSwappingFee?: CurrencyAmount;
 } {
   // for each hop in our trade, take away the x*y=k price impact from 0.2% fees
   // e.g. for 3 tokens/2 hops: 1 - ((1 - .02) * (1-.02))
@@ -29,8 +32,25 @@ export function computeTradePriceBreakdown(trade?: Trade): {
         )
       );
 
+  // for each hop in our trade, take away the x*y=k price impact from 0.2% fees
+  // e.g. for 3 tokens/2 hops: 1 - ((1 - .02) * (1-.02))
+  const realizedSwappingFee = !trade
+    ? undefined
+    : ONE_HUNDRED_PERCENT.subtract(
+        trade.route.pairs.reduce<Fraction>(
+          (currentFee: Fraction): Fraction => currentFee.multiply(INPUT_FRACTiON_AFTER_SWAPPING_FEE),
+          ONE_HUNDRED_PERCENT
+        )
+      );
+
   // remove lp fees from price impact
-  const priceImpactWithoutFeeFraction = trade && realizedLPFee ? trade.priceImpact.subtract(realizedLPFee) : undefined;
+  let priceImpactWithoutFeeFraction = trade && realizedLPFee ? trade.priceImpact.subtract(realizedLPFee) : undefined;
+
+  // remove swapping fees from price impact
+  priceImpactWithoutFeeFraction =
+    priceImpactWithoutFeeFraction && realizedSwappingFee
+      ? priceImpactWithoutFeeFraction.subtract(realizedSwappingFee)
+      : undefined;
 
   // the x*y=k impact
   const priceImpactWithoutFeePercent = priceImpactWithoutFeeFraction
@@ -45,7 +65,19 @@ export function computeTradePriceBreakdown(trade?: Trade): {
       ? new TokenAmount(trade.inputAmount.token, realizedLPFee.multiply(trade.inputAmount.raw).quotient)
       : CurrencyAmount.ether(realizedLPFee.multiply(trade.inputAmount.raw).quotient));
 
-  return { priceImpactWithoutFee: priceImpactWithoutFeePercent, realizedLPFee: realizedLPFeeAmount };
+  // the amount of the input that accrues to Swap
+  const realizedSwappingFeeAmount =
+    realizedSwappingFee &&
+    trade &&
+    (trade.inputAmount instanceof TokenAmount
+      ? new TokenAmount(trade.inputAmount.token, realizedSwappingFee.multiply(trade.inputAmount.raw).quotient)
+      : CurrencyAmount.ether(realizedSwappingFee.multiply(trade.inputAmount.raw).quotient));
+
+  return {
+    priceImpactWithoutFee: priceImpactWithoutFeePercent,
+    realizedLPFee: realizedLPFeeAmount,
+    realizedSwappingFee: realizedSwappingFeeAmount,
+  };
 }
 
 // computes the minimum amount out and maximum amount in for a trade given a user specified allowed slippage in bips

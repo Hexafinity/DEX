@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { Text, Button } from '@nguyenphu27/uikit';
 import { Repeat } from 'react-feather';
 
-import useI18n from 'hooks/useI18n';
+import useI18n from '../../hooks/useI18n';
 import { Field } from '../../state/swap/actions';
 import {
   computeSlippageAdjustedAmounts,
@@ -35,7 +35,7 @@ export default function SwapModalFooter({
     () => computeSlippageAdjustedAmounts(trade, allowedSlippage),
     [allowedSlippage, trade]
   );
-  const { priceImpactWithoutFee, realizedLPFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade]);
+  const { priceImpactWithoutFee, realizedLPFee, realizedSwappingFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade]);
   const severity = warningSeverity(priceImpactWithoutFee);
   const TranslateString = useI18n();
 
@@ -110,6 +110,15 @@ export default function SwapModalFooter({
           </RowFixed>
           <Text fontSize="14px">
             {realizedLPFee ? `${realizedLPFee?.toSignificant(6)} ${trade.inputAmount.currency.symbol}` : '-'}
+          </Text>
+        </RowBetween>
+        <RowBetween>
+          <RowFixed>
+            <Text fontSize="14px">{TranslateString(2228, 'Swapping Fee')}</Text>
+            <QuestionHelper text={TranslateString(2230, 'For each trade a 0.2% fee is paid as swapping fee.')} />
+          </RowFixed>
+          <Text fontSize="14px">
+            {realizedSwappingFee ? `${realizedSwappingFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
           </Text>
         </RowBetween>
       </AutoColumn>
