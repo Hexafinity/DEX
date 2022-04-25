@@ -35,7 +35,10 @@ export default function SwapModalFooter({
     () => computeSlippageAdjustedAmounts(trade, allowedSlippage),
     [allowedSlippage, trade]
   );
-  const { priceImpactWithoutFee, realizedLPFee, realizedSwappingFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade]);
+  const { priceImpactWithoutFee, realizedLPFee, realizedSwappingFee } = useMemo(
+    () => computeTradePriceBreakdown(trade),
+    [trade]
+  );
   const severity = warningSeverity(priceImpactWithoutFee);
   const TranslateString = useI18n();
 

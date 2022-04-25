@@ -9,11 +9,12 @@ import {
 import { Field } from '../state/swap/actions';
 import { basisPointsToPercent } from './index';
 
+const SWAPPING_FEE = 20;
 const BASE_FEE = new Percent(JSBI.BigInt(20), JSBI.BigInt(10000));
-const SWAPPING_FEE = new Percent(JSBI.BigInt(20), JSBI.BigInt(10000));
+const SWAPPING_FEE_PERCENT = new Percent(JSBI.BigInt(20), JSBI.BigInt(10000));
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000));
 const INPUT_FRACTION_AFTER_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE);
-const INPUT_FRACTiON_AFTER_SWAPPING_FEE = ONE_HUNDRED_PERCENT.subtract(SWAPPING_FEE);
+const INPUT_FRACTiON_AFTER_SWAPPING_FEE = ONE_HUNDRED_PERCENT.subtract(SWAPPING_FEE_PERCENT);
 
 // computes price breakdown for the trade
 export function computeTradePriceBreakdown(trade?: Trade): {
@@ -85,7 +86,8 @@ export function computeSlippageAdjustedAmounts(
   trade: Trade | undefined,
   allowedSlippage: number
 ): { [field in Field]?: CurrencyAmount } {
-  const pct = basisPointsToPercent(allowedSlippage);
+  // Add swapping fee to allowedSlippage
+  const pct = basisPointsToPercent(allowedSlippage + SWAPPING_FEE);
   return {
     [Field.INPUT]: trade?.maximumAmountIn(pct),
     [Field.OUTPUT]: trade?.minimumAmountOut(pct),
