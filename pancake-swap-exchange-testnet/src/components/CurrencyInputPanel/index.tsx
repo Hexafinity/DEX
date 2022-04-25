@@ -3,7 +3,7 @@ import { Currency, Pair } from '@nguyenphu27/sdk';
 import { Button, ChevronDownIcon, Text } from '@nguyenphu27/uikit';
 import styled from 'styled-components';
 import { darken } from 'polished';
-import useI18n from 'hooks/useI18n';
+import useI18n from '../../hooks/useI18n';
 import { useCurrencyBalance } from '../../state/wallet/hooks';
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal';
 import CurrencyLogo from '../CurrencyLogo';

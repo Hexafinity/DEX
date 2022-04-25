@@ -9,8 +9,8 @@ import { ArrowDown, Plus } from 'react-feather';
 import { RouteComponentProps } from 'react-router';
 
 import { BigNumber } from '@ethersproject/bignumber';
-import ConnectWalletButton from 'components/ConnectWalletButton';
-import useI18n from 'hooks/useI18n';
+import ConnectWalletButton from '../../components/ConnectWalletButton';
+import useI18n from '../../hooks/useI18n';
 import { AutoColumn, ColumnCenter } from '../../components/Column';
 import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal';
 import CurrencyInputPanel from '../../components/CurrencyInputPanel';

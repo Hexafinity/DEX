@@ -3,8 +3,9 @@ import { getAddress } from '@ethersproject/address';
 import { AddressZero } from '@ethersproject/constants';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
 import { BigNumber } from '@ethersproject/bignumber';
-import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json';
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@nguyenphu27/sdk';
+// import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json';
+import PancakeSwapRouter02ABI from '../constants/abis/pancake-swap-router02.json';
 import { ROUTER_ADDRESS } from '../constants';
 import { TokenAddressMap } from '../state/lists/hooks';
 
@@ -89,7 +90,7 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 
 // account is optional
 export function getRouterContract(_: number, library: Web3Provider, account?: string): Contract {
-  return getContract(ROUTER_ADDRESS, IUniswapV2Router02ABI, library, account);
+  return getContract(ROUTER_ADDRESS, PancakeSwapRouter02ABI, library, account);
 }
 
 export function escapeRegExp(string: string): string {
