@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ButtonProps, useWalletModal } from '@nguyenphu27/uikit';
-import useI18n from 'hooks/useI18n';
-import useAuth from 'hooks/useAuth';
+import useI18n from '../../hooks/useI18n';
+import useAuth from '../../hooks/useAuth';
 
 const UnlockButton: React.FC<ButtonProps> = (props) => {
   const TranslateString = useI18n();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Box, Button, Flex, Input, Text } from '@nguyenphu27/uikit';
-import { useUserSlippageTolerance } from 'state/user/hooks';
+import { useUserSlippageTolerance } from '../../state/user/hooks';
 import QuestionHelper from '../QuestionHelper';
 
 const MAX_SLIPPAGE = 5000;

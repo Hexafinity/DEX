@@ -1,6 +1,6 @@
-import { useCurrency } from 'hooks/Tokens';
-import { useTradeExactIn } from 'hooks/Trades';
-import { tryParseAmount } from 'state/swap/hooks';
+import { useCurrency } from '../hooks/Tokens';
+import { useTradeExactIn } from '../hooks/Trades';
+import { tryParseAmount } from '../state/swap/hooks';
 
 const useGetCakeBusdLpPrice = () => {
   const cakeAddress = '0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82';

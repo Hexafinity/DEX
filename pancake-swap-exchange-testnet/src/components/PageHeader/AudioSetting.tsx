@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex, Text, PancakeToggle, useMatchBreakpoints } from '@nguyenphu27/uikit';
-import { useAudioModeManager } from 'state/user/hooks';
+import { useAudioModeManager } from '../../state/user/hooks';
 
 type AudioSettingModalProps = {
   translateString: (translationId: number, fallback: string) => string;

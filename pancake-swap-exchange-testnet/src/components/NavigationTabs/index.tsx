@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link as HistoryLink } from 'react-router-dom';
 import { ArrowLeft } from 'react-feather';
-import { RowBetween } from 'components/Row';
-import QuestionHelper from 'components/QuestionHelper';
-import useI18n from 'hooks/useI18n';
+import { RowBetween } from '../Row';
+import QuestionHelper from '../QuestionHelper';
+import useI18n from '../../hooks/useI18n';
 
 const Tabs = styled.div`
   display: flex;

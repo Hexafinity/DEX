@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { useActiveWeb3React } from 'hooks';
+import { useActiveWeb3React } from '.';
 
 const initialState = {
   profileLink: 'https://pancakeswap.finance/profile',

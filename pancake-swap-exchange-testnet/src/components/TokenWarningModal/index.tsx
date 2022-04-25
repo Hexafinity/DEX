@@ -4,7 +4,7 @@ import { Button, Text } from '@nguyenphu27/uikit';
 import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { AlertTriangle } from 'react-feather';
-import useI18n from 'hooks/useI18n';
+import useI18n from '../../hooks/useI18n';
 import { useActiveWeb3React } from '../../hooks';
 import { useAllTokens } from '../../hooks/Tokens';
 import { getBscScanLink, shortenAddress } from '../../utils';

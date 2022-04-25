@@ -4,7 +4,7 @@ import { usePopper } from 'react-popper';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Text, ChevronDownIcon, CloseIcon } from '@nguyenphu27/uikit';
 import styled from 'styled-components';
-import useI18n from 'hooks/useI18n';
+import useI18n from '../../hooks/useI18n';
 import { useFetchListCallback } from '../../hooks/useFetchListCallback';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import useToggle from '../../hooks/useToggle';

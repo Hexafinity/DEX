@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { CheckmarkCircleIcon, ErrorIcon, Flex, LinkExternal, Text, Modal, Button } from '@nguyenphu27/uikit';
-import { useActiveWeb3React } from 'hooks';
-import { getBscScanLink } from 'utils';
-import { isTransactionRecent, useAllTransactions } from 'state/transactions/hooks';
-import { TransactionDetails } from 'state/transactions/reducer';
-import Loader from 'components/Loader';
+import { useActiveWeb3React } from '../../hooks';
+import { getBscScanLink } from '../../utils';
+import { isTransactionRecent, useAllTransactions } from '../../state/transactions/hooks';
+import { TransactionDetails } from '../../state/transactions/reducer';
+import Loader from '../Loader';
 
 type RecentTransactionsModalProps = {
   onDismiss?: () => void;

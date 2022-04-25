@@ -10,8 +10,8 @@ import {
   WalletConnectConnector,
 } from '@web3-react/walletconnect-connector';
 import { connectorLocalStorageKey, ConnectorNames } from '@nguyenphu27/uikit';
-import useToast from 'hooks/useToast';
-import { connectorsByName } from 'connectors';
+import useToast from './useToast';
+import { connectorsByName } from '../connectors';
 
 const useAuth = () => {
   const { activate, deactivate } = useWeb3React();

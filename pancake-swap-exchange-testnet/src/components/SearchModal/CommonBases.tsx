@@ -3,7 +3,7 @@ import { Text } from '@nguyenphu27/uikit';
 import { ChainId, Currency, currencyEquals, ETHER, Token } from '@nguyenphu27/sdk';
 import styled from 'styled-components';
 
-import useI18n from 'hooks/useI18n';
+import useI18n from '../../hooks/useI18n';
 import { SUGGESTED_BASES } from '../../constants';
 import { AutoColumn } from '../Column';
 import QuestionHelper from '../QuestionHelper';

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { FixedSizeList } from 'react-window';
 import { ThemeContext } from 'styled-components';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import useI18n from 'hooks/useI18n';
+import useI18n from '../../hooks/useI18n';
 import { useActiveWeb3React } from '../../hooks';
 import { AppState } from '../../state';
 import { useAllTokens, useToken } from '../../hooks/Tokens';
